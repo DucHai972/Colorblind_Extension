@@ -7,16 +7,12 @@ from flask_cors import CORS
 from transformers import BlipProcessor, BlipForConditionalGeneration
 
 app = Flask(__name__)
-CORS(app)  # This will allow requests from all origins
+CORS(app)  
 
 processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
 model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
     
-# Function to preprocess the image
 def preprocess_image(image):
-    # Resize the image to match the model's input size (if needed)
-    # Convert the image to the format expected by the model (e.g., RGB)
-    # Perform any other necessary preprocessing steps
     return image.convert('RGB')
 
 @app.route('/predict', methods=['POST'])
@@ -29,22 +25,12 @@ def predict():
         return jsonify({'error': 'No selected file'})
 
     try:
-        # Read the image file
         img = Image.open(io.BytesIO(file.read()))
-        
-        # Preprocess the image
         img = preprocess_image(img)
-        
-        # Get additional parameters (e.g., text input)
         text = request.form.get('text', '')
-        
-        # Process the image and text inputs with the processor model
         inputs = processor(img, text, return_tensors="pt")
-        
-        # Generate predictions using the model
+
         out = model.generate(**inputs)
-        
-        # Decode the model output to get the prediction
         prediction = processor.decode(out[0], skip_special_tokens=True)
 
         return jsonify({'prediction': prediction})
