@@ -68,14 +68,6 @@ This project is developed by a school team to assist color blind individuals by 
    - The extension will send the image to the Flask server for processing.
    - An audio description of the image will be played automatically.
 
-## Project Structure
-
-- `app.py`: Flask server application.
-- `static/`: Static files including HTML, CSS, and JavaScript for the extension.
-- `templates/`: HTML templates for the extension interface.
-- `requirements.txt`: List of Python packages required for the project.
-- `models/`: Directory where the downloaded models should be placed.
-
 ## Credits
 
 This project was developed by a dedicated team of students to enhance web accessibility for individuals with color blindness and visual impairments.
