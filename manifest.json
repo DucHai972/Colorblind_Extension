@@ -1,22 +1,41 @@
 {
-  "manifest_version": 3,
-  "name": "Deep Learning Image Predictor",
+  "manifest_version": 2,
+  "name": "ColorB and Deep Learning Image Predictor",
+  "description": "This extension provides visually impaired color blind people a new experience and includes a deep learning image prediction feature.",
   "version": "1.0",
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "colorblinding.js",
+      "reload.js",
+      "background.js"
+    ]
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": ["<all_urls>"],
+      "js": [
+        "jquery.min.js",
+        "colorblinding.js",
+        "popup.js"
+      ]
+    }
+  ],
   "permissions": [
-    "activeTab",
+    "tabs",
+    "storage",
     "clipboardRead",
     "clipboardWrite",
-    "http://127.0.0.1:5000/*"
-  ],
-  "background": {
-    "service_worker": "background.js"
-  },
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icon.png",
-      "48": "icon.png",
-      "128": "icon.png"
-    }
-  }
+    "http://127.0.0.1:5000/*",
+    "http://*/*",
+    "https://*/*"
+  ]
 }

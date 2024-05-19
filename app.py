@@ -4,17 +4,13 @@ import numpy as np
 import io
 import pickle
 from flask_cors import CORS
-
+from transformers import BlipProcessor, BlipForConditionalGeneration
 
 app = Flask(__name__)
 CORS(app)  # This will allow requests from all origins
 
-# Load the processor.pkl model
-with open('processor.pkl', 'rb') as f:
-    processor = pickle.load(f)
-
-with open ('model.pkl', 'rb') as f:
-    model = pickle.load(f)
+processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
+model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
     
 # Function to preprocess the image
 def preprocess_image(image):
