@@ -22,7 +22,7 @@ function appendSVG(document) {
     var iDiv = document.createElement('div');
     iDiv.id = 'blockColorblindContent';
     iDiv.innerHTML = svg;
-    iDiv.style.display = 'none'; //Fix issue "blockColorblindContent" is showing and taking up space on some websites #5
+    iDiv.style.display = 'none';
     document.getElementsByTagName('body')[0].appendChild(iDiv);
 }
 
